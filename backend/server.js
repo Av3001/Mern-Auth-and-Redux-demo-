@@ -20,6 +20,11 @@ app.use(cookieParser());
 
 app.use('/api/users', userRoutes);
 
+app.use(express.static("public"));
+app.use("/*", (req, res) => {
+    res.sendFile(path.join(__dirname, "/public/index.html"))
+})
+
 if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, '/frontend/dist')));
